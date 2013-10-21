@@ -1,19 +1,23 @@
 package model;
 
+
 /** Objects of this class represents 
  *	a deck (of cards).
  *	you can get the amounts of cards in the deck 
  *	But you can only deal the cord on the top
  */
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.swing.ImageIcon;
 
-public class Deck {
+public class Deck implements Serializable {
 
-	private static final ImageIcon CARD_BACK= new ImageIcon("images/card_back.png");
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Card> Cards = new ArrayList<Card>();
 	
 	/** The constructor fills the deck with 52 cards
@@ -45,7 +49,7 @@ public class Deck {
 		Cards.clear();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-            	Cards.add(new Card(rank, suit, CARD_BACK));
+            	Cards.add(new Card(rank, suit, new ImageIcon("images/"+suit.getCode() +""+rank.getCode()+".png" )));
             }
         }
 	}

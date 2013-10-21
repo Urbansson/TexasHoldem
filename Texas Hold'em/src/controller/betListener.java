@@ -6,24 +6,43 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import view.PlayerChoices;
+import view.ChoicePanel;
+import view.GameArea;
+import model.Player;
+
 
 public class betListener implements ActionListener, ChangeListener{
 	
-	PlayerChoices choices;
 		
-	public betListener(PlayerChoices choices){
-		this.choices = choices;
+	private Player player;
+	private GameArea view;
+	private ChoicePanel choiceView;
+	private int tobet;
+	
+	public betListener(GameArea view, ChoicePanel choiceView){
+		this.view = view;
+		this.choiceView = choiceView;
 	}
 	
-	public void actionPerformed(ActionEvent ae) {	
-		choices.getSliderValue();
-
+	public void setPlayer(Player player){
+		this.player = player;
+	}
+	
+	public void actionPerformed(ActionEvent ae) {
+		synchronized(player) {
+		player.setBet(tobet);
+		System.out.println(player.getPoints());	
+		player.setmoveAction("Rised");
+		view.updatePlayer(player.getId());
+		player.moved();
+		player.notifyAll();
+		}
 	}
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		choices.updateAmount();	
+		tobet = choiceView.getSliderValue();
+		choiceView.updateAmount();
 	}
 
 }

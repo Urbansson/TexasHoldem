@@ -1,5 +1,8 @@
 package model;
 
+
+import java.io.Serializable;
+
 import javax.swing.ImageIcon;
 
 /** Objects of this class represents cards in
@@ -8,8 +11,12 @@ import javax.swing.ImageIcon;
  *	rank or suit cannot be changed.
  */
 
-public class Card {
+public class Card implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** rank: 1 = Ace, 2 = 2, ...
 	 *  suit: 1 = spades, 2 = hearts, ...
 	 */		

@@ -1,10 +1,17 @@
 package model;
 
 
+
+import java.io.Serializable;
 import java.util.Comparator;
 
 
-public class CompareSuit implements Comparator<Card>{
+public class CompareSuit implements Comparator<Card>, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public int compare(Card card1, Card card2) {

@@ -9,11 +9,17 @@ public class Menu extends JPanel{
 	
 	private static String[] colorStrings = { "Red", "Blue", "Green" };
 	
-	Table table;
+	private Table table;
+	private NewGame newGameDialog;
+	private About aboutDialog;
+	private Thread thread;
 	
-	public Menu(Table table){
+	public Menu(GameArea game, NewGame newGameDialog,About aboutDialog){
 		this.setBackground(Color.GREEN);
-		this.table = table;
+		this.table = game.getTable();
+		this.newGameDialog = newGameDialog;
+		this.aboutDialog = aboutDialog;
+		this.thread = game.getThread();
 	}
 	
 	public JMenuBar createMenuBar() { 
@@ -34,6 +40,9 @@ public class Menu extends JPanel{
 		JMenuItem LoadGameItem = new JMenuItem("Load Game");
 		mainMenu.add(LoadGameItem);
 		
+		JMenuItem SaveGameItem = new JMenuItem("Save Game");
+		mainMenu.add(SaveGameItem);
+		
 		mainMenu.addSeparator();
 
 		JMenuItem quitItem = new JMenuItem("Quit");
@@ -41,16 +50,19 @@ public class Menu extends JPanel{
 		
 		
 		// a listener for the about Item
-		aboutListener aboutListener = new aboutListener();
+		aboutListener aboutListener = new aboutListener(aboutDialog);
 		aboutItem.addActionListener(aboutListener);
 		
 		// a listener for the New Game Item
-		newGameListener newGameListener = new newGameListener(table);
+		newGameListener newGameListener = new newGameListener(table, newGameDialog, thread);
 		newGameItem.addActionListener(newGameListener);
 
 		// a listener for the Load Game Item
-		loadGameListener loadGameListener = new loadGameListener();
+		loadGameListener loadGameListener = new loadGameListener(table, thread);
 		LoadGameItem.addActionListener(loadGameListener);
+		
+		saveGameListener saveGameListener = new saveGameListener(table);
+		SaveGameItem.addActionListener(saveGameListener);
 		
 		// a listener for the Quit item
 		quitListener quitListener = new quitListener();

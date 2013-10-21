@@ -1,10 +1,13 @@
 package model;
+
+import java.io.Serializable;
+
 /** Objects of this class extends RuntimeException
  * 	and is a exception when you try to get a card that does no exist 
  */
 
 
-public class NoSuchCardException extends RuntimeException {
+public class NoSuchCardException extends RuntimeException implements Serializable {
 
 	/** If you need to send a message with the throw
 	 */
