@@ -6,28 +6,33 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.*;
-
 import model.Player;
 
 public class PlayerPanel extends JPanel{
 
-	private static final ImageIcon CARD_PLACEHOLDER = new ImageIcon("images/card_placeholder.png");
-	private static final ImageIcon CARD_BACK= new ImageIcon("images/card_back.png");
+	private final ImageIcon CARD_PLACEHOLDER;// = new ImageIcon("images/card_placeholder.png");
+	private final ImageIcon CARD_BACK;//= new ImageIcon("images/card_back.png");
 
+	
+	
 	private JLabel nameLabel;
 	private JLabel cashLabel;
 	private JLabel betLabel;
 	private JLabel lastMove;
 	private JLabel card1;
 	private JLabel card2;
-	
-	Player player;
+	private ClassLoader cl;
+	private Player player;
 
 	public PlayerPanel(){
 		nameLabel = new JLabel();
 		cashLabel = new JLabel();
 		betLabel = new JLabel();
 		lastMove = new JLabel();
+		cl = this.getClass().getClassLoader();
+		CARD_PLACEHOLDER = new ImageIcon(cl.getResource("images/card_placeholder.png"));
+		CARD_BACK = new ImageIcon(cl.getResource("images/card_back.png"));
+		
 		card1 = new JLabel(CARD_PLACEHOLDER);
 		card2 = new JLabel(CARD_PLACEHOLDER);
 		
@@ -108,8 +113,10 @@ public class PlayerPanel extends JPanel{
 	}
 
 	public void showCards(){
-		card1.setIcon(player.getHand().get(0).getImage()); 
-		card2.setIcon(player.getHand().get(1).getImage()); 	
+
+		card1.setIcon(new ImageIcon(cl.getResource("images/"+player.getHand().get(0).getSuit().getCode() +""+player.getHand().get(0).getRank().getCode()+".png" )));
+		card2.setIcon(new ImageIcon(cl.getResource("images/"+player.getHand().get(1).getSuit().getCode() +""+player.getHand().get(1).getRank().getCode()+".png" )));
+
 	}
 	
 	public void hideCards(){

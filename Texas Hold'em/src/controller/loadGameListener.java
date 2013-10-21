@@ -15,9 +15,9 @@ import model.Player;
 import model.Table;
 
 public class loadGameListener implements ActionListener{
-	Table table;
-    JFileChooser chooser;
-    Thread thread;
+	private Table table;
+    private JFileChooser chooser;
+    private Thread thread;
 
 	public loadGameListener(Table table, Thread thread){
 		this.table = table;
@@ -30,13 +30,11 @@ public class loadGameListener implements ActionListener{
 		//openFile()
 		if(thread!=null){
 			thread.interrupt();
-    		System.out.print("Stop Load Game");
  		
     		try {
     			thread.join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Waitingon thread");
 				e.printStackTrace();
 			}
 		}

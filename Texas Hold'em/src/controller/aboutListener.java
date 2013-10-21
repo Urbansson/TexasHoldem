@@ -8,6 +8,7 @@ import view.About;
 public class aboutListener implements ActionListener{
 	
 	private About aboutDialog;
+	
 	public aboutListener(About about){
 		this.aboutDialog = about;
 	}

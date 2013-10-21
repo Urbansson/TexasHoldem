@@ -31,7 +31,6 @@ public class betListener implements ActionListener, ChangeListener{
 	public void actionPerformed(ActionEvent ae) {
 		synchronized(player) {
 		player.setBet(tobet);
-		System.out.println(player.getPoints());	
 		player.setmoveAction("Rised");
 		view.updatePlayer(player.getId());
 		player.moved();

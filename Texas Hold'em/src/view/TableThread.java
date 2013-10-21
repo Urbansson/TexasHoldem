@@ -11,6 +11,5 @@ public class TableThread extends Thread{
 
 	public void run() {
 		table.play();
-		System.out.println("DoneWithRun");
 	}
 }

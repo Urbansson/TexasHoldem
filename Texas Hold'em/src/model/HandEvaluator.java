@@ -11,7 +11,7 @@ public class HandEvaluator implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ArrayList<Card> Cards = new ArrayList<Card>();
+	private ArrayList<Card> Cards = new ArrayList<Card>();
 	
 	public HandEvaluator(){
 		

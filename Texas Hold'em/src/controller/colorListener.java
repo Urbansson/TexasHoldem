@@ -10,7 +10,7 @@ public class colorListener implements ActionListener{
 	
 	private static String[] colorStrings = { "Red", "Blue", "Green" };
 	private static Color[] colors = { Color.red, Color.blue, Color.green };
-	Menu panel;
+	private Menu panel;
 	
 	public colorListener(Menu test){
 		this.panel = test;

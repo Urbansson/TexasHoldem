@@ -31,7 +31,6 @@ public class Table extends Observable implements Serializable{
 		Evaluator = new HandEvaluator();
 		pot = 0;
 		dealer = 0;
-		//System.out.println("Done!");
 	}
 	public void addUI(Object gui){
 		this.addObserver((Observer) gui);
@@ -146,20 +145,21 @@ public class Table extends Observable implements Serializable{
 			done = true;
 			rounds = 0;
 			folds=0;
-			
+
+
 			//Check for active players, if all folded or only one left break;
 			for(int i = 0; i < Players.size(); i++){
-					if(Players.get(0).getfold()){
+					if(Players.get(i).getfold()){
 						folds++;
 					}
 			}
+			
 			if(folds == Players.size()-1){
 				break;
 			}
 			
 			for(int i = dealer; i < Players.size(); i++){
 
-				System.out.println("I ar "+i);
 
 				if(!Players.get(i).getfold()){//If the player folded he is not allowed to make a move until next round //and if only one player left he wins
 
@@ -174,7 +174,6 @@ public class Table extends Observable implements Serializable{
 									Players.get(i).wait();
 								}
 								catch(InterruptedException e){
-									System.out.print("Fungerar");
 									throw e;
 								}
 							}
@@ -185,8 +184,15 @@ public class Table extends Observable implements Serializable{
 
 					}
 					if(Players.get(i) instanceof Computer){
-						System.out.println("Spelare "+i+ " Ar Dator Spela automatiskt");
 						//Datorn spelar
+						Computer temp;
+						temp = (Computer) Players.get(i);
+						temp.move(this);
+						temp = null;
+						setChanged();
+						notifyObservers("bot"+i);
+						Thread.sleep(3000);
+
 					}	
 				}
 				rounds++;
@@ -202,6 +208,7 @@ public class Table extends Observable implements Serializable{
 			for(int i = 0; i < Players.size()-1; i++){
 				if(Players.get(i).getBet() != Players.get(i+1).getBet()){
 					if(Players.get(i).getfold() != Players.get(i+1).getfold()){
+					}else if(Players.get(i).getPoints()-Players.get(i).getBet() == 0 || Players.get(i+1).getPoints()-Players.get(i+1).getBet() == 0){	
 					}
 					else{
 						done = false;

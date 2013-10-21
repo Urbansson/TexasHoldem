@@ -19,8 +19,8 @@ import model.Table;
 
 public class TablePanel extends JPanel{
 
-	private static final ImageIcon CARD_PLACEHOLDER = new ImageIcon("images/card_placeholder.png");
-	private static final ImageIcon CARD_BACK= new ImageIcon("images/card_back.png");
+	private final ImageIcon CARD_PLACEHOLDER;// = new ImageIcon("images/card_placeholder.png");
+	private final ImageIcon CARD_BACK;//= new ImageIcon("images/card_back.png");
 	
 	private Table table;
 	
@@ -35,6 +35,9 @@ public class TablePanel extends JPanel{
 		this.table = table_;
 		this.setPreferredSize(new Dimension(600,260));
 		this.setLayout(new BorderLayout());
+		ClassLoader cl = this.getClass().getClassLoader();
+		CARD_PLACEHOLDER = new ImageIcon(cl.getResource("images/card_placeholder.png"));
+		CARD_BACK = new ImageIcon(cl.getResource("images/card_back.png"));
 
 		JPanel infoArea = new JPanel();
 		JPanel cardArea = new JPanel();
@@ -102,8 +105,13 @@ public class TablePanel extends JPanel{
 	
 	
 	public void updateCards(ArrayList<Card> cards){
+		ClassLoader cl = this.getClass().getClassLoader();
+
 		for(int i = 0; i < cards.size(); i++){
-			this.cards[i].setIcon(cards.get(i).getImage());//add imageitem from card
+			//this.cards[i].setIcon(cards.get(i).getImage());//add imageitem from card
+			this.cards[i].setIcon(new ImageIcon(cl.getResource("images/"+cards.get(i).getSuit().getCode() +""+cards.get(i).getRank().getCode()+".png" )));//add imageitem from card
+
+			
 		}
 	}
 

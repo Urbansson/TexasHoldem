@@ -22,16 +22,13 @@ public class newGameListener implements ActionListener{
 	public void actionPerformed(ActionEvent ae) {
 		newGameDialog.setVisible(true);
 		
-		//System.out.println("Choosed to start");
 		if(t!=null){
 			t.interrupt();
-    		System.out.print("Stop");
     		
     		try {
 				t.join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Waitingon thread");
 				e.printStackTrace();
 			}
 		}

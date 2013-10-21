@@ -2,9 +2,6 @@ package model;
 
 
 import java.io.Serializable;
-
-import javax.swing.ImageIcon;
-
 /** Objects of this class represents cards in
  *	a deck (of cards).
  *	A card is immutable, i.e. once created its
@@ -23,18 +20,13 @@ public class Card implements Serializable{
 	
     private final Rank rank;
     private final Suit suit;
-    private final ImageIcon image;
 	
-	public Card(Rank rank, Suit suit, ImageIcon image) {
+	public Card(Rank rank, Suit suit) {
 		this.rank = rank;
 		this.suit = suit;
-		this.image = image;
 	}
 	
-	public ImageIcon getImage() {
-		return image;
-	}
-	
+
 	public Rank getRank() {
 		return rank;
 	}

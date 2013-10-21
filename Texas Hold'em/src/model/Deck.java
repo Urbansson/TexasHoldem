@@ -10,8 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.swing.ImageIcon;
-
 public class Deck implements Serializable {
 
 	/**
@@ -49,7 +47,7 @@ public class Deck implements Serializable {
 		Cards.clear();
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-            	Cards.add(new Card(rank, suit, new ImageIcon("images/"+suit.getCode() +""+rank.getCode()+".png" )));
+            	Cards.add(new Card(rank, suit ));
             }
         }
 	}

@@ -5,7 +5,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-public class Main {
+public class TexasHoldem {
 
 	public static void main(String args[]) {		
 		//creating the game

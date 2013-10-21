@@ -11,32 +11,28 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class GameArea extends JPanel implements Observer{
 
-	private static final ImageIcon CARD_BACK= new ImageIcon("images/card_back.png");
 
-	JLabel splash = new JLabel(CARD_BACK);
-	Table table;
-	TablePanel midTable;
-	ArrayList<PlayerPanel> player = new ArrayList<PlayerPanel>();
-	ChoicePanel choices;
-	GridBagConstraints gc;
-	TableThread thread;
+	//private JLabel splash = new JLabel(CARD_BACK);
+	private Table table;
+	private TablePanel midTable;
+	private ArrayList<PlayerPanel> player = new ArrayList<PlayerPanel>();
+	private ChoicePanel choices;
+	private GridBagConstraints gc;
+	private TableThread thread;
 	
-	JPanel gamepanel;
-	JPanel inputPanel;
+	private JPanel gamepanel;
+	private JPanel inputPanel;
 	
 	public GameArea(){
 		table = new Table();
 		table.addUI(this);
 		gamepanel = new JPanel();
 		inputPanel = new JPanel();
-		inputPanel.setBackground(Color.red);
 
 		this.setLayout(new BorderLayout());
 		
@@ -121,6 +117,8 @@ public class GameArea extends JPanel implements Observer{
 		if(msg.compareTo("NewGame")==0){
 			newGame();
 		}
+		
+		updateBot(msg);
 		
 		updatePot(msg);
 
@@ -240,6 +238,8 @@ public class GameArea extends JPanel implements Observer{
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						player.get(0).hideCards();
+						choices.hideChoice();
+
 					}
 				});
 				
@@ -281,6 +281,30 @@ public class GameArea extends JPanel implements Observer{
 		}
 	}
 	
+	private void updateBot(String message){
+		for(int i=0;i < table.getPlayers().size();i++){
+			
+			if(message.compareTo("bot0")==0){
+
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						player.get(0).updatePlayer(table.getPlayer(0));
+					}
+				});
+			}
+			
+			if(message.compareTo("bot1")==0){
+
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						player.get(1).updatePlayer(table.getPlayer(1));
+
+					}
+				});
+			}
+		}
+	}
+	
 	private void removeBrokePlayer(String message){
 		for(int i=0;i < table.getPlayers().size();i++){
 			
@@ -302,7 +326,5 @@ public class GameArea extends JPanel implements Observer{
 		}
 	}
 	
-	//Runnables will be put here later
-
 private static final long serialVersionUID = 1L;
 }

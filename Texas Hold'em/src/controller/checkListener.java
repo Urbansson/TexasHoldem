@@ -25,9 +25,7 @@ public class checkListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent ae) {
 		int tobet = table.findBiggestBet();
-		
-		System.out.println(tobet);
-		
+				
 		if(player.getPoints()<=tobet){
 			tobet = player.getPoints();
 		}

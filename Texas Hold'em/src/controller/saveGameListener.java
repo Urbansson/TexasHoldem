@@ -12,8 +12,8 @@ import model.Table;
 
 public class saveGameListener implements ActionListener{
 
-	Table table;
-    JFileChooser chooser;
+	private Table table;
+    private JFileChooser chooser;
 
 	public saveGameListener(Table table){
 		this.table = table;
